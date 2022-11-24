@@ -62,7 +62,7 @@ app.get("/", function(req, res) {
         res.redirect("/");//imp when ever we get changes in database use this
       }
       else{
-        res.render("list", {listTitle: "Today", newListItems: itemsDetails});
+        res.render("list", {listTitle: "To-Do-List", newListItems: itemsDetails});
       }
     }
   });
@@ -91,6 +91,33 @@ app.get("/:customListName",function(req,res){
   });
 });
 
+app.post("/listName",function(req,res){
+
+    var customName = _.capitalize(req.body.ListName);
+    if(customName===""){
+      customName = "Welcome to To-Do-List"
+    }
+  
+    List.findOne({name : customName},function(err,foundList){
+      if(err){
+        console.log("err");
+      }
+      else{
+        if(!foundList){
+          const list = new List({
+            name : customName,
+            items : defaultItems
+          });
+          list.save();
+          res.redirect("/"+customName);
+        }
+        else{
+          res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+        }
+      }
+    });
+});
+
 app.post("/", function(req, res){
 
   const itemNames = req.body.newItem;
@@ -99,7 +126,7 @@ app.post("/", function(req, res){
     name : itemNames
   });
 
-  if(listName === "Today"){
+  if(listName === "To-Do-List"){
     insItem.save();
     res.redirect("/");
   }
