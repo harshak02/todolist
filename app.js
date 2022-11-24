@@ -118,6 +118,10 @@ app.post("/listName",function(req,res){
     });
 });
 
+app.post("/orig",function(req,res){
+  res.redirect("/"+"To-Do-List");
+});
+
 app.post("/", function(req, res){
 
   const itemNames = req.body.newItem;
