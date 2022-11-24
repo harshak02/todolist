@@ -1,12 +1,21 @@
 <%- include("header") -%>
 
-  <div id="box">
+<div class="container">
+  <div>
     <form action="/listName" method="post">
-      <label for="cityInput">Enter List :</label>
-      <input id="cityInput" type="text" name="ListName">
-      <button type="submit" name="submit">+</button>
+      <label ><h2>Enter Custom List :</h2></label>
+      <input class="hello" name="ListName">
+      <button type="submit" name="submit">Create</button>
     </form>
   </div>
+
+  <div>
+    <form action="/orig" method="post">
+      <label><h2>Click here for home route :</h2></label>
+      <button type="submit" name="submit">Click</button>
+    </form>
+  </div>
+</div>
 
   <div class="box" id="heading">
     <h1> <%= listTitle %> </h1>
@@ -24,7 +33,7 @@
       <% } %> 
       <form class="item" action="/" method="post">
         <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-        <button type="submit" name="list" value = "<%= listTitle %>">+</button>
+        <button class="butto" type="submit" name="list" value = "<%= listTitle %>">+</button>
       </form>
   </div>
 
